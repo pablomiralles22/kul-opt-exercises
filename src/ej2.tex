@@ -1,0 +1,91 @@
+\item Consider the following quadratic program
+
+  \[
+    \begin{aligned}
+      \min \quad & \frac{1}{2}x^T B x + g^T x \\
+      \textrm{s.t.} \quad & Ax \le b.
+    \end{aligned}
+  \]
+
+  \begin{enumerate}[label=(\alph*)]
+    \item Under what condition is the cost a convex function? When is it
+      strongly convex?
+
+      \medskip\textbf{Solution.} We know from class that $f(x) = \frac{1}{2}x^T
+      B x + g^T x$ is convex if $H$ is positive semidefinite, whereas it is
+      strongly convex if $H$ is positive definite. To show this, we can use the
+      fact that $\nabla ^2 f(x) \equiv H$ and \textit{Theorem 5.7}.
+
+      As a matter of fact, we can show that the reciprocal is also true. If $H$
+      is not positive semidefinite, then there exists $\hat{x}$ such that
+      $\hat{x}^T H \hat{x} < 0$. Then 
+      \[
+      f(\hat{x}) = \frac{1}{2} \hat{x}^T B \hat{x} + g^T \hat{x} <
+      g^T \hat{x} =
+      0 + g^T(\hat{x} - 0) =
+      f(0) + \nabla f(0)^T(\hat{x}-0)
+      ,\] 
+      showing that the condition in \textit{Theorem 5.6.(i)} does not hold. If
+      suppose now that $H$ is not positive definite, then there exists $\hat{x}$
+      such that $\hat{x}^T H \hat{x} \le 0$, and by an analogous argument we
+      arrive at
+      \[
+      f(\hat{x}) \le 
+      f(0) + \nabla f(0)^T(\hat{x}-0)
+      ,\]
+      which shows that the condition in \textit{Theorem 5.6.(iii)} cannot hold.
+
+    \item Under what conditions is the problem convex?
+
+      \medskip\textbf{Solution.} Since $\{x\in \mathbb{R}^n : Ax\le b\}$ is
+      always a convex set, the problem is convex if and only if $f$ is convex,
+      that is, if $H$ is positive semidefinite.
+
+    \item Suppose that the cost is strongly convex. Derive the dual problem.
+
+      \medskip\textbf{Solution.} The Lagrangian and its derivatives with respect
+      to $x$ are:
+      \[
+      \begin{aligned}
+        L(x,\mu) & = \frac{1}{2}x^T B x + g^T x + \mu^T(Ax-b) \\
+        \nabla_x L(x,\mu) & = Bx + g + A\mu \\
+        \nabla_x^2 L(x,\mu) & = B.
+      \end{aligned}
+      \]
+      Since $f$ is strongly convex, $B$ is positive definite and invertible. We
+      deduce then that the only stationary point
+      \[
+      x^* = -B^{-1}(g+A\mu)
+      \] 
+      is the only minimum. The dual function is therefore
+      \[
+        q(\mu) = L(x^*,\mu) =
+        -\frac{1}{2} \mu^TA B^{-1} A^T\mu - \mu^T(AB^{-1}g + b) -
+        \frac{1}{2}g^TB^{-1}g
+      .\] 
+      The dual problem is thus
+      \[
+      \begin{aligned}
+        \max \quad &  -\frac{1}{2} \mu^TA B^{-1} A^T\mu - \mu^T(AB^{-1}g + b) - \frac{1}{2}g^TB^{-1}g \\
+        \textrm{s.t.} \quad & \mu\ge 0.
+      \end{aligned}
+      \] 
+
+    \item When does strong duality hold?
+
+      \medskip\textbf{Solution.} We know that if Slater's conditions hold, then
+      strong duality holds as well. In this case, since all constraints are
+      affine, it suffices to show that $f$ is convex, which happens if and only
+      if $H$ is positive semidefinite.
+
+    \item Suppose that the cost is strongly convex, and that you apply an
+      algorithm that solves the dual problem. Give a formula that recovers teh
+      primal solution from a dual solution.
+
+      \medskip\textbf{Solution.} If $\mu^*$ is the solution of the dual problem,
+      then by \textit{Theorem 6.5}
+      \[
+      x^* = arg\min_{x\in \mathbb{R}^n} L(x,\mu^*) = -B^{-1}(g+A\mu)
+      .\] 
+
+  \end{enumerate}

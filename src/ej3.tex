@@ -1,0 +1,117 @@
+\item The (Euclidean) projection of a vector $z\in \mathbb{R}^n$ onto a subset
+  $C$ of $\mathbb{R}^n$ is defined as the solution of the following optimization
+  problem:
+  \begin{equation}
+    \begin{aligned}
+      \min \quad& \frac{1}{2} \|x-z\|^2 \\
+      s.t. \quad& x\in C
+    \end{aligned}
+  \end{equation}
+  and is denoted by $P_C(z)$.
+
+  \begin{enumerate}[label=(\alph*)]
+    \item Assume that the set $C$ is a convex set. Is the projection $P_C(z)$ 
+      unique? Why?
+
+      \medskip\textbf{Solution.} Yes, the cost function is a quadratic function
+      with the identity matrix, which is positive definite. This means that the
+      cost is strongly convex, and therefore there exists at most one global
+      minimum (see \textit{Theorem 4.2.}).
+
+    \item Suppose that we want to compute $P_C(z)$ for $C=\{x\in
+      \mathbb{R}^n|Ax=0\}$, where $A$ is an $m\times n$ matrix (set $C$ is
+      called the nullspace of $A$). In other words, $P_C(z)$ is the solution of
+
+      \begin{equation}
+        \label{eq:ej3-b-problem}
+        \begin{aligned}
+          \min \quad& \frac{1}{2} \|x-z\|^2 \\
+          s.t. \quad& Ax=0
+        .\end{aligned}
+      \end{equation}
+      Show that the dual function related to problem \autoref{eq:ej3-b-problem} can
+      be expressed as
+      \[
+      q(\lambda)=-\frac{1}{2}\|A^T\lambda-z\|^2 + \frac{1}{2}\|z\|^2
+      ,\] 
+      where $\lambda\in \mathbb{R}^m$ is the dual vector associated with the
+      equality constraints of \autoref{eq:ej3-b-problem}. Show that the (negative)
+      dual problem can be expressed as follows:
+
+      \begin{equation}
+        \label{eq:ej3-b-dual-problem}
+        \begin{aligned}
+          \min \quad& \frac{1}{2} \|y-z\|^2 \\
+          s.t. \quad& y\in C^\bot
+        ,\end{aligned}
+      \end{equation}
+      where $C^\bot = \{y\in \mathbb{R}^m|y=A^T\lambda, \lambda\in
+      \mathbb{R}^m\} $.
+
+      \medskip\textbf{Solution.} We have that
+      \[
+      \begin{aligned}
+        L(x,\lambda) & = \frac{1}{2} \|x-z\|^2 + \lambda^T Ax \\
+        \nabla_x L(x,\lambda) & = x-z+A\lambda \\
+        \nabla_x^2 L(x,\lambda) & = \Id_n.
+      \end{aligned}
+      \]
+
+      The only minimum is $x=z- A\lambda$, and therefore
+      \[
+      q(\lambda)=
+      \frac{1}{2}\|A\lambda\|^2 + \lambda^T A (z-A\lambda) =
+      -\frac{1}{2}\|A\lambda\|^2 + \lambda^T A z \left( -\frac{1}{2}\|z\|^2 + \frac{1}{2}\|z\|^2 \right) =
+      -\frac{1}{2}\|A^T\lambda-z\|^2 + \frac{1}{2}\|z\|^2
+      .\]
+
+      The last part follows from the fact that $\|z\|^2$ does not depend on
+      $\lambda$, so we can remove the term from the dual problem.
+
+    \item Explain why strong duality always hold for \autoref{eq:ej3-b-problem}. Use
+      strong duality to show
+      \begin{equation}
+        \label{eq:ej3-c}
+        \|z\|^2 = \|z-P_C(z)\|^2 + \|z-P_{C^\bot}(z)\|^2
+      .\end{equation}
+
+      \medskip\textbf{Solution.} Slater's conditions hold, show strong duality
+      holds as well. Let $x^*$ be the solution of \autoref{eq:ej3-b-problem} and
+      $\lambda^*$ the solution of the dual. Then
+      \[
+      \frac{1}{2}\|x^*-z\|^2 = p^* = d^* = q(\lambda^*)=
+      -\frac{1}{2}\|A^T \lambda^* - z\|^2 + \frac{1}{2}\|z\|^2
+      .\] 
+      By putting $y^*=A^T\lambda^*$, we have that 
+      \[
+      \|z\|^2 = \|x^*-z\|^2 + \|y^*-z\|^2
+      ,\] 
+      but $x^*=P_C(z)$ and by the equivalence between the dual problem and
+      \autoref{eq:ej3-b-dual-problem} we have that  $y^*=P_{C^\bot}(z)$.
+
+    \item Use Lagrangian stationarity to show that
+      \[
+      z= P_C(z) + P_{C^\bot}(z)
+      .\]
+
+      \medskip\textbf{Solution.}
+      \[
+      0=\nabla_x L(x^*,\lambda^*) = 
+      x^*-z+A\lambda^* =
+      x^*-z+y^*
+      ,\] 
+      and therefore $z= P_C(z) + P_{C^\bot}(z)$.
+
+    \item Suppose that $A=\begin{bmatrix} 1 & 0 \end{bmatrix} $ and
+      $z=\begin{bmatrix} 1 \\ 1 \end{bmatrix} $.
+
+      Find $P_C(z),P_{C^\bot}(z)$. Sketch graphically sets $C,C^\bot$, points
+      $z,P_C(z),P_{C^\bot}(z)$. Based on this figure give a geometric
+      interpretation of condition \ref{eq:ej3-c}.
+
+      \medskip\textbf{Solution.} $C=\Span (0,1)$ (y-axis) and
+      $C^\bot=\Span(1,0)$ (x- axis), and so $P_C(z)=(0,1)$ and
+      $P_{C^\bot}(z)=(1,0)$. What we are doing here is decomposing the vector
+      along the x- and y- axis. The equation is the Pythagoras' theorem.
+
+  \end{enumerate}

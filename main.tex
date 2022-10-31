@@ -1,0 +1,43 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage[english]{babel}
+\usepackage{amsmath, amssymb, amsthm, amsfonts, mathabx}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\def\eps{\varepsilon}
+
+\newcommand{\dotp}[2]{\left\langle#1,#2\right\rangle}
+
+\newcounter{objects}[section]
+\renewcommand{\theobjects}{\thesection.\arabic{objects}}
+\newtheorem{theorem}[objects]{Teorema}
+\newtheorem{proposition}[objects]{Proposición}
+\newtheorem{definition}[objects]{Definición}
+\newtheorem{example}[objects]{Ejemplo}
+\newtheorem{corollary}[objects]{Corolario}
+\newtheorem{lemma}[objects]{Lema}
+\newtheorem{remark}[objects]{Observación}
+
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\Span}{span}
+
+\setlength{\parskip}{1em}
+
+\title{Optimization theory exercises}
+\author{Pablo Miralles González}
+\date{\today}
+
+\begin{document}
+  \maketitle
+  
+  \begin{enumerate}
+    \input{src/ej1}
+    \input{src/ej2}
+    \input{src/ej3}
+  \end{enumerate}
+\end{document}

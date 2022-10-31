@@ -1,0 +1,62 @@
+\item Consider the general nonlinear optimization problem
+
+  \[
+    \begin{aligned}
+      \min \quad & f(x) & \\
+      \textrm{s.t.} \quad & g_i(x) \le 0 \quad & i=1,\ldots,m \\
+                          & h_i(x) = 0 \quad & i=1,\ldots,p.
+    \end{aligned}
+  \] 
+
+  \begin{enumerate}[label=(\alph*)]
+    \item Write down the Lagrangian.
+
+      \medskip\textbf{Solution.}
+      \[
+      L(x, \lambda, \mu) = f(x) + \lambda^T h(x) + \mu^T g(x)
+      .\] 
+
+    \item Write down the dual function.
+
+      \medskip\textbf{Solution.}
+      \[
+      q(\lambda,\mu) = \inf_{x \in \mathbb{R}^n} L(x,\lambda,\mu)
+      .\] 
+
+    \item Write down the dual problem.
+
+      \medskip\textbf{Solution.}
+      \[
+        \begin{aligned}
+          \max \quad & q(\lambda,\mu) \\
+          \textrm{s.t.} \quad & \mu\ge 0 \\
+        \end{aligned}
+      \] 
+
+    \item Explain weak duality. Show that weak duality always holds.
+
+      \medskip\textbf{Solution.} The term weak duality refers to the fact that the
+      optimal cost of the dual problem is always a lower bound of the optimal
+      cost of the primal problem. To show this, let $x$ be any primal feasible
+      point and $(\lambda,\mu)$ any dual feasible point. Then:
+      \[
+        q(\lambda, \mu) \le 
+        L(x, \lambda, \mu) = 
+        f(x) + \lambda^T h(x) + \mu^T g(x) \underbrace{=}_{\text{$h(x)=0,\mu\ge 0,g(x)\le 0$}}
+        f(x)
+      .\] 
+
+      It suffices now to take infimums over dual and primal feasible points.
+
+    \item Explain what is strong duality. Suppose that all functions are convex.
+      Give a sufficient condition under which strong duality holds.
+
+       \medskip\textbf{Solution.} Strong duality refers to the condition
+       $d^*=p^*$, where $d^*$ is the optimal cost of the dual problem and $p^*$
+       the optimal cost of the primal problem. This does not always hold, but
+       when all functions are convex then Slater's condition is sufficient for
+       strong duality to hold. In this case, each $h_i$ should be affine, and
+       that there should exist a feasible vector $\overline{x}$ such that
+       $g_i(\overline{x})<0$ for each non-affine $g_i$.
+
+  \end{enumerate}
